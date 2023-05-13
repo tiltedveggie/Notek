@@ -1,6 +1,7 @@
 import { Schema, model } from 'mongoose';
+import { ITask } from '../interfaces/tasks.interfaces';
 
-const taskSchema = new Schema(
+const taskSchema = new Schema<ITask>(
 	{
 		title: { type: String, required: true, unique: true, trim: true },
 		description: { type: String, required: true },
@@ -12,4 +13,4 @@ const taskSchema = new Schema(
 	}
 );
 
-export default model('Task', taskSchema);
+export default model<ITask>('Task', taskSchema);
