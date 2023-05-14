@@ -18,3 +18,19 @@ export const addTask = async (req: Request, res: Response) => {
 
 	res.redirect('/');
 };
+
+export const editTask = async (req: Request, res: Response) => {
+	const { id } = req.params;
+
+	await Task.findByIdAndUpdate(id, req.body);
+
+	res.redirect('/');
+};
+
+export const deleteTask = async (req: Request, res: Response) => {
+	const { id } = req.params;
+
+	await Task.findByIdAndDelete(id);
+
+	res.redirect('/');
+};
