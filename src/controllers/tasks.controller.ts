@@ -9,9 +9,12 @@ export const getTasks = async () => {
 };
 
 export const addTask = async (req: Request, res: Response) => {
-	const task = new Task(req.body);
-
-	await task.save();
+	try {
+		const task = new Task(req.body);
+		await task.save();
+	} catch (err) {
+		console.log(err);
+	}
 
 	res.redirect('/');
 };
