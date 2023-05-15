@@ -19,6 +19,16 @@ export const addTask = async (req: Request, res: Response) => {
 	res.redirect('/');
 };
 
+export const renderEditTask = async (req: Request, res: Response) => {
+	try {
+		const task = await Task.findById(req.params['id']).lean();
+
+		return res.render('edit', { task });
+	} catch (err) {
+		console.log(err);
+	}
+};
+
 export const editTask = async (req: Request, res: Response) => {
 	const { id } = req.params;
 
@@ -31,6 +41,18 @@ export const deleteTask = async (req: Request, res: Response) => {
 	const { id } = req.params;
 
 	await Task.findByIdAndDelete(id);
+
+	res.redirect('/');
+};
+
+export const toggleDoneTask = async (req: Request, res: Response) => {
+	const { id } = req.params;
+
+	const task = await Task.findById(id);
+
+	task && (task.done = !task.done);
+
+	await task?.save();
 
 	res.redirect('/');
 };

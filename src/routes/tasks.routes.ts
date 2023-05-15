@@ -1,22 +1,21 @@
 import { Router } from 'express';
-import { addTask, editTask, deleteTask } from '../controllers/tasks.controller';
-import Task from '../models/Task';
+import {
+	addTask,
+	renderEditTask,
+	editTask,
+	deleteTask,
+	toggleDoneTask
+} from '../controllers/tasks.controller';
 
 const router = Router();
 
 router.post('/add', addTask);
 
-router.get('/edit/:id', async (req, res) => {
-	try {
-		const task = await Task.findById(req.params.id).lean();
-
-		return res.render('edit', { task });
-	} catch (err) {
-		console.log(err);
-	}
-});
+router.get('/edit/:id', renderEditTask);
 
 router.post('/edit/:id', editTask);
+
+router.get('/toggleDone/:id', toggleDoneTask);
 
 router.get('/delete/:id', deleteTask);
 
