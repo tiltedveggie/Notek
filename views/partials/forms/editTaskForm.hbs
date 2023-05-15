@@ -1,0 +1,16 @@
+<form action='/tasks/edit/{{task._id}}' method='post'>
+	<div>
+		<label for='title'>Edit title:</label>
+		<input id='title' name='title' type='text' value='{{task.title}}' />
+	</div>
+
+	<div>
+		<label for='description'>Edit description:</label>
+		<textarea
+			id='description'
+			name='description'
+		>{{task.description}}</textarea>
+	</div>
+
+	<button>Add task</button>
+</form>
